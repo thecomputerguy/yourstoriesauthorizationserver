@@ -1,3 +1,4 @@
+/*
 package com.yourstories.authorizationserver.config;
 
 import com.yourstories.authorizationserver.services.DefaultUserService;
@@ -29,7 +30,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter
 {
     @Autowired
-    UserService userService;
+    DefaultUserService defaultUserService;
 
     @Bean
     protected SessionRegistry sessionRegistryImpl()
@@ -49,7 +50,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
             throws Exception
     {
         builder
-                .userDetailsService(this.userService)
+                .userDetailsService(this.defaultUserService)
                         .passwordEncoder(new BCryptPasswordEncoder())
                 .and()
                 .eraseCredentials(true);
@@ -58,15 +59,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
     @Override
     public void configure(WebSecurity security)
     {
-        security.ignoring().antMatchers("/resource/**", "/favicon.ico");
+        security.ignoring().antMatchers("/resource*/
+/**", "/favicon.ico");
     }
 
     @Override
     protected void configure(HttpSecurity security) throws Exception
     {
         security
-                .authorizeRequests()
-                    .antMatchers("/session/list")
+                .authorizeRequests().antMatchers("/oauth/token/revokeById*").permitAll()
+                .antMatchers("/tokens*").permitAll()
+                .antMatchers("/swagger*").permitAll()
+                .antMatchers("/api/v1/user/register").permitAll()
+                .anyRequest().authenticated()
+                .and().formLogin().permitAll()
+                .and().csrf().disable();;
+                    */
+/*.antMatchers("/session/list")
                         .hasAuthority("VIEW_USER_SESSIONS")
                     .anyRequest().authenticated()
                 .and().formLogin()
@@ -89,6 +98,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
                         return !r.getServletPath().startsWith("/services/") &&
                                 ("POST".equals(m) || "PUT".equals(m) ||
                                         "DELETE".equals(m) || "PATCH".equals(m));
-                    });
+                    });*//*
+
     }
 }
+*/

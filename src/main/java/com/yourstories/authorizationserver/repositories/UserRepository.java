@@ -1,56 +1,14 @@
 package com.yourstories.authorizationserver.repositories;
 
+
 import com.yourstories.authorizationserver.model.User;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-import java.util.List;
+public interface UserRepository extends JpaRepository<User, Long> {
+    User findByEmail(String email);
 
-@Repository
-public class UserRepository implements IUserRepository {
+    @Override
+    void delete(User user);
 
-	@Override
-	public List<User> getAllUsers() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public User getUser(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public User createUser(User author) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public User updateUser(User author) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void deleteUser(User author) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteUser(String id) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public User getByUsername(String username) {
-		return null;
-	}
-
-	@Override
-	public User save(User user) {
-		return null;
-	}
 }

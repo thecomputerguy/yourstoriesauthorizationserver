@@ -1,6 +1,8 @@
 package com.yourstories.authorizationserver.controllers;
 
 import com.yourstories.authorizationserver.model.Employee;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -12,7 +14,7 @@ import java.util.Optional;
 
 @Controller
 public class EmployeeController {
-
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private List<Employee> employees = new ArrayList<>();
 
     @GetMapping("/employee")

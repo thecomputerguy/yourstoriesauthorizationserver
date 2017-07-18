@@ -3,12 +3,10 @@ package com.yourstories.authorizationserver.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.init.DataSourceInitializer;
 import org.springframework.jdbc.datasource.init.DatabasePopulator;
@@ -29,6 +27,8 @@ import javax.sql.DataSource;
 import java.util.Arrays;
 
 @Configuration
+@ComponentScan(basePackages = {"com.yourstories.authorizationserver"})
+@EnableMongoRepositories(basePackages = {"com.yourstories.authorizationserver"})
 @PropertySource({ "classpath:persistence.properties" })
 @EnableAuthorizationServer
 public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {

@@ -1,5 +1,7 @@
 package com.yourstories.authorizationserver.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -18,7 +20,7 @@ import java.util.List;
 
 @Controller
 public class TokenController {
-
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Resource(name = "tokenServices")
     ConsumerTokenServices tokenServices;
 
