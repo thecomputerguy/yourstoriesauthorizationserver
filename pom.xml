@@ -140,14 +140,15 @@
 			<artifactId>log4j-jcl</artifactId>
 		</dependency>
 
-		<!--Aeragear base32 otp api-->
-		<!-- https://mvnrepository.com/artifact/org.jboss.aerogear/aerogear-otp-java -->
+		<!-- 2fa -->
+
 		<dependency>
 			<groupId>org.jboss.aerogear</groupId>
 			<artifactId>aerogear-otp-java</artifactId>
 			<version>1.0.0</version>
-			<scope>provided</scope>
+			<scope>compile</scope>
 		</dependency>
+
 
 		<!--java mail sender api-->
 
