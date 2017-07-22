@@ -15,7 +15,7 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import java.util.Locale;
 
 @Configuration
-@ComponentScan(basePackages = { "org.baeldung.web" })
+@ComponentScan(basePackages = { "com.yourstories.authorizationserver" })
 @EnableWebMvc
 public class MvcConfig extends WebMvcConfigurerAdapter {
 

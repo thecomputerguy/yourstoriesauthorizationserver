@@ -1,3 +1,4 @@
+/*
 package com.yourstories.authorizationserver.google2fa;
 
 import com.yourstories.authorizationserver.model.User;
@@ -49,3 +50,4 @@ public class CustomAuthenticationProvider extends DaoAuthenticationProvider {
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
 }
+*/

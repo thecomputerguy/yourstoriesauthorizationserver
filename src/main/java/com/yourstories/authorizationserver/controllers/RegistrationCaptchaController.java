@@ -9,16 +9,22 @@ import com.yourstories.authorizationserver.services.IUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-@Controller
+@RestController
 public class RegistrationCaptchaController {
     private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 
@@ -31,15 +37,17 @@ public class RegistrationCaptchaController {
     @Autowired
     private ApplicationEventPublisher eventPublisher;
 
+    @Value("${http.connector:\"http://\"}")
+    String connector;
+
     public RegistrationCaptchaController() {
         super();
     }
 
     // Registration
 
-    @RequestMapping(value = "/user/registrationCaptcha", method = RequestMethod.POST)
-    @ResponseBody
-    public GenericResponse captchaRegisterUserAccount(@Valid final UserDto accountDto, final HttpServletRequest request) {
+    @RequestMapping(value = "/user/registrationCaptcha", method = {RequestMethod.POST}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<?> captchaRegisterUserAccount(@Valid final UserDto accountDto, final HttpServletRequest request) {
 
         final String response = request.getParameter("g-recaptcha-response");
         captchaService.processResponse(response);
@@ -48,11 +56,11 @@ public class RegistrationCaptchaController {
 
         final User registered = userService.registerNewUserAccount(accountDto);
         eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), getAppUrl(request)));
-        return new GenericResponse("success");
+        return new ResponseEntity<GenericResponse>(new GenericResponse("success"), new HttpHeaders(), HttpStatus.OK);
     }
 
     private String getAppUrl(HttpServletRequest request) {
-        return "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+        return connector + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
     }
 
 }

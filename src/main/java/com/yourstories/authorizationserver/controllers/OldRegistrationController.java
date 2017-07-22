@@ -1,3 +1,4 @@
+/*
 package com.yourstories.authorizationserver.controllers;
 
 import com.yourstories.authorizationserver.dto.UserDto;
@@ -223,3 +224,4 @@ public class OldRegistrationController {
         return email;
     }
 }
+*/

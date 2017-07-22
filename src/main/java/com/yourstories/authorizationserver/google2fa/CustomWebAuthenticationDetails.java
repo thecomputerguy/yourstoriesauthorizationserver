@@ -1,3 +1,4 @@
+/*
 package com.yourstories.authorizationserver.google2fa;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,4 +19,4 @@ public class CustomWebAuthenticationDetails extends WebAuthenticationDetails {
     public String getVerificationCode() {
         return verificationCode;
     }
-}
+}*/

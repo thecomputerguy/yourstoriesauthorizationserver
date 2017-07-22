@@ -1,3 +1,4 @@
+/*
 package com.yourstories.authorizationserver.google2fa;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,4 +13,4 @@ public class CustomWebAuthenticationDetailsSource implements AuthenticationDetai
     public WebAuthenticationDetails buildDetails(HttpServletRequest context) {
         return new CustomWebAuthenticationDetails(context);
     }
-}
+}*/
